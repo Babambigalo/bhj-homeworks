@@ -10,7 +10,7 @@ function popUp(){
 
     showSuccess[0].onclick = function(){
         modalMain.style.display = 'none';
-        modalSuccess.className += ' modal_active' ;
+        modalSuccess.classList.add('modal_active');
     }   
 
     modalClose[2].onclick = function() {
