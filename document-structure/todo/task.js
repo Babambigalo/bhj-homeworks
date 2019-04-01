@@ -3,15 +3,11 @@ const taskAdd = document.getElementById('tasks__add');
 const tasksList = document.getElementById('tasks__list');
 let tasksRemove;
 let tasks;
+
 if (localStorage.length !== 0){
     tasks = localStorage.getItem('tasks').split(' ');
     for(let i=0;i<tasks.length;i++){
-        tasksList.innerHTML+= `<div class="task">
-        <div class="task__title">
-            ${tasks[i]}
-        </div>
-        <a href="#" class="task__remove">&times;</a>
-    </div>`;
+        pastHtml(tasks[i]);
     }
     tasksRemove = document.querySelectorAll('.task__remove');
 }else{
@@ -20,20 +16,24 @@ if (localStorage.length !== 0){
 taskAdd.addEventListener('click', addTask);
 taskAdd.addEventListener('keydown',addTask);
 
+function pastHtml(text){
+    tasksList.innerHTML+=
+    `<div class="task">
+        <div class="task__title">
+            ${text}
+        </div>
+        <a href="#" class="task__remove">&times;</a>
+    </div>`;
+    
+}
+
 function addTask(event) {
     event.preventDefault();
     if(input.value.length !== 0 || (event.target.keyCode === 'Enter' && input.value.length !== 0)){
         const text = input.value;
         tasks.push(text);
         localStorage.setItem('tasks',tasks.join(' '));
-        tasksList.innerHTML+= 
-        `<div class="task">
-            <div class="task__title">
-                ${text}
-            </div>
-            <a href="#" class="task__remove">&times;</a>
-        </div>`;
-
+        pastHtml(text);
        input.value = '';
        tasksRemove =  document.querySelectorAll('.task__remove');
        deleteTask();

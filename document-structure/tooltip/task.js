@@ -9,11 +9,13 @@ links.forEach((elem)=>{
                 if(link.childNodes.length > 1) link.removeChild(link.childNodes[1]);
            }));           
             const elemOffsetValue = String(elem.offsetLeft) + 'px';
+            console.log(elem.getBoundingClientRect().top);
             const tip = document.createElement('div');
             tip.textContent = elem.getAttribute('title');
             tip.classList.add('tooltip');
             tip.classList.add('tooltip_active');
             tip.style.marginLeft = elemOffsetValue;
+            tip.style.position = 'absolute';
             elem.appendChild(tip);
         }
     })
